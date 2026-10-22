@@ -1,5 +1,5 @@
 // Offline cache: app shell + built assets; network refreshes the cache in the background.
-const CACHE = "orrca-v1";
+const CACHE = "orrca-v2";
 self.addEventListener("install", (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(["/", "/index.html", "/manifest.json", "/icon-192.png", "/icon-512.png"])));
   self.skipWaiting();

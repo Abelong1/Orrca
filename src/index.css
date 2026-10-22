@@ -4,6 +4,11 @@
 
 body {
   margin: 0;
-  background: #F4FBFA;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: #CCDBF8;
+  font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
+
+/* serif display type for titles, matching the ticket-card design */
+.serif { font-family: "Lora", Georgia, "Times New Roman", serif; }
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
