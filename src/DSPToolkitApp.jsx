@@ -60,8 +60,8 @@ function ScreenHeader({ moduleNum, title, onBack }) {
 
 const SCREEN_SHELL = {
   backgroundColor: COLORS.bg,
-  minHeight: "780px",
-  borderRadius: "36px",
+  minHeight: "100dvh",
+  borderRadius: 0,
 };
 
 /* ============ HOME SCREEN ============ */
@@ -112,7 +112,7 @@ function BottomNav({ active, onNavigate }) {
     { id: "profile", icon: User },
   ];
   return (
-    <div className="px-6 pb-6 pt-2">
+    <div className="px-6 pt-2 sticky bottom-0 z-20" style={{ paddingBottom: "calc(16px + env(safe-area-inset-bottom))", backgroundColor: COLORS.bg }}>
       <div className="flex items-center justify-around rounded-full py-3" style={{ backgroundColor: COLORS.navy }}>
         {tabs.map((t) => {
           const Icon = t.icon;
@@ -135,7 +135,7 @@ function BottomNav({ active, onNavigate }) {
 
 function HomeScreen({ onNavigate }) {
   return (
-    <div className="w-full max-w-sm mx-auto flex flex-col justify-between overflow-hidden" style={SCREEN_SHELL}>
+    <div className="w-full max-w-3xl mx-auto flex flex-col justify-between overflow-hidden" style={SCREEN_SHELL}>
       <div className="flex flex-col flex-1 min-h-0">
         <div className="px-6 pt-6 pb-4 flex items-center justify-between gap-2">
           <div>
@@ -149,7 +149,7 @@ function HomeScreen({ onNavigate }) {
             style={{ width: 84, height: 84, objectFit: "contain", marginTop: -6 }}
           />
         </div>
-        <div className="grid grid-cols-2 gap-3 px-6 flex-1 min-h-0 pb-4">
+        <div className="grid grid-cols-2 sm:grid-cols-4 auto-rows-fr sm:auto-rows-[170px] gap-3 px-6 flex-1 sm:flex-none min-h-0 pb-4">
           {MODULES.map((m) => <ModuleTile key={m.id} m={m} onSelect={onNavigate} />)}
         </div>
       </div>
@@ -174,7 +174,7 @@ function HeroScreen({ onNavigate }) {
   const FeaturedIcon = featured.icon;
 
   return (
-    <div className="w-full max-w-sm mx-auto flex flex-col justify-between overflow-hidden" style={SCREEN_SHELL}>
+    <div className="w-full max-w-3xl mx-auto flex flex-col justify-between overflow-hidden" style={SCREEN_SHELL}>
       <div className="flex flex-col flex-1 min-h-0 overflow-y-auto">
         <div className="px-6 pt-8 pb-2">
           <p className="text-sm" style={{ color: COLORS.deep }}>This week</p>
@@ -264,7 +264,7 @@ function ProfileScreen({ onNavigate }) {
   const currentAvatar = AVATAR_OPTIONS.find((a) => a.id === avatarId) || AVATAR_OPTIONS[0];
 
   return (
-    <div className="w-full max-w-sm mx-auto flex flex-col justify-between overflow-hidden" style={SCREEN_SHELL}>
+    <div className="w-full max-w-3xl mx-auto flex flex-col justify-between overflow-hidden" style={SCREEN_SHELL}>
       <div className="flex flex-col flex-1 min-h-0 overflow-y-auto">
         <div className="px-6 pt-8 pb-2 flex items-center gap-3">
           <button
@@ -397,7 +397,7 @@ function DACADCConverter({ onBack }) {
   const markerPoint = mode === "ADC" ? { vin: Number(vin), code: clampedCode } : { vin: analogOut, code: Number(digitalCode) };
 
   return (
-    <div className="w-full max-w-sm mx-auto overflow-hidden flex flex-col" style={SCREEN_SHELL}>
+    <div className="w-full max-w-3xl mx-auto overflow-hidden flex flex-col" style={SCREEN_SHELL}>
       <ScreenHeader moduleNum={1} title="DAC / ADC Converter" onBack={onBack} />
       <div className="px-6 pb-4">
         <div className="flex rounded-full p-1" style={{ backgroundColor: COLORS.foam }}>
@@ -727,7 +727,7 @@ function LaplaceTransform({ onBack }) {
   }
 
   return (
-    <div className="w-full max-w-sm mx-auto overflow-hidden flex flex-col" style={SCREEN_SHELL}>
+    <div className="w-full max-w-3xl mx-auto overflow-hidden flex flex-col" style={SCREEN_SHELL}>
       <ScreenHeader moduleNum={2} title="Laplace Transform" onBack={onBack} />
       <div className="px-6 flex-1 overflow-y-auto pb-6">
         <div className="rounded-2xl p-4 mb-4 relative overflow-hidden text-white"
@@ -866,7 +866,7 @@ function DifferenceEquation({ onBack }) {
   }, [xSeq, ySeq, N]);
 
   return (
-    <div className="w-full max-w-sm mx-auto overflow-hidden flex flex-col" style={SCREEN_SHELL}>
+    <div className="w-full max-w-3xl mx-auto overflow-hidden flex flex-col" style={SCREEN_SHELL}>
       <ScreenHeader moduleNum={3} title="Difference Equation" onBack={onBack} />
       <div className="px-6 flex-1 overflow-y-auto pb-6">
         <div className="rounded-2xl p-4 mb-4 text-white relative overflow-hidden"
@@ -1036,7 +1036,7 @@ function Convolution({ onBack }) {
 
   if (!valid) {
     return (
-      <div className="w-full max-w-sm mx-auto p-6" style={SCREEN_SHELL}>
+      <div className="w-full max-w-3xl mx-auto p-6" style={SCREEN_SHELL}>
         <ScreenHeader moduleNum={4} title="Convolution" onBack={onBack} />
         <p className="text-sm px-6" style={{ color: "#C0392B" }}>Enter valid comma-separated numeric sequences for x[n] and h[n].</p>
       </div>
@@ -1052,7 +1052,7 @@ function Convolution({ onBack }) {
   const ySoFar = ySeq.map((val, i) => ({ n: i, y: i <= n ? val : null }));
 
   return (
-    <div className="w-full max-w-sm mx-auto overflow-hidden flex flex-col" style={SCREEN_SHELL}>
+    <div className="w-full max-w-3xl mx-auto overflow-hidden flex flex-col" style={SCREEN_SHELL}>
       <ScreenHeader moduleNum={4} title="Convolution" onBack={onBack} />
       <div className="px-6 flex-1 overflow-y-auto pb-6">
         <div className="rounded-2xl p-4 mb-4 text-white relative overflow-hidden"
@@ -1201,7 +1201,7 @@ function DTFS({ onBack }) {
 
   if (!valid) {
     return (
-      <div className="w-full max-w-sm mx-auto" style={SCREEN_SHELL}>
+      <div className="w-full max-w-3xl mx-auto" style={SCREEN_SHELL}>
         <ScreenHeader moduleNum={5} title="DT Fourier Series" onBack={onBack} />
         <p className="text-sm px-6" style={{ color: "#C0392B" }}>Enter a valid comma-separated sequence for x[n].</p>
       </div>
@@ -1209,7 +1209,7 @@ function DTFS({ onBack }) {
   }
 
   return (
-    <div className="w-full max-w-sm mx-auto overflow-hidden flex flex-col" style={SCREEN_SHELL}>
+    <div className="w-full max-w-3xl mx-auto overflow-hidden flex flex-col" style={SCREEN_SHELL}>
       <ScreenHeader moduleNum={5} title="DT Fourier Series" onBack={onBack} />
       <div className="px-6 flex-1 overflow-y-auto pb-6">
         <div className="rounded-2xl p-4 mb-4 text-white relative overflow-hidden"
@@ -1351,7 +1351,7 @@ function Filters({ onBack }) {
   }, [type, Rn, C, fc]);
 
   return (
-    <div className="w-full max-w-sm mx-auto overflow-hidden flex flex-col" style={SCREEN_SHELL}>
+    <div className="w-full max-w-3xl mx-auto overflow-hidden flex flex-col" style={SCREEN_SHELL}>
       <ScreenHeader moduleNum={7} title="Filters" onBack={onBack} />
       <div className="px-6 pb-4">
         <div className="flex rounded-full p-1" style={{ backgroundColor: COLORS.foam }}>
@@ -1510,7 +1510,7 @@ function FrequencyDomain({ onBack }) {
 
   if (!valid) {
     return (
-      <div className="w-full max-w-sm mx-auto" style={SCREEN_SHELL}>
+      <div className="w-full max-w-3xl mx-auto" style={SCREEN_SHELL}>
         <ScreenHeader moduleNum={8} title="Frequency Domain" onBack={onBack} />
         <p className="text-sm px-6" style={{ color: "#C0392B" }}>Enter a valid comma-separated sequence for x[n].</p>
       </div>
@@ -1518,7 +1518,7 @@ function FrequencyDomain({ onBack }) {
   }
 
   return (
-    <div className="w-full max-w-sm mx-auto overflow-hidden flex flex-col" style={SCREEN_SHELL}>
+    <div className="w-full max-w-3xl mx-auto overflow-hidden flex flex-col" style={SCREEN_SHELL}>
       <ScreenHeader moduleNum={8} title="Frequency Domain" onBack={onBack} />
       <div className="px-6 flex-1 overflow-y-auto pb-6">
         <div className="rounded-2xl p-4 mb-4 text-white relative overflow-hidden"
@@ -1749,7 +1749,7 @@ function ZTransform({ onBack }) {
   const allZeros = result ? result.terms.flatMap((t) => t.built.zeros) : [];
 
   return (
-    <div className="w-full max-w-sm mx-auto overflow-hidden flex flex-col" style={SCREEN_SHELL}>
+    <div className="w-full max-w-3xl mx-auto overflow-hidden flex flex-col" style={SCREEN_SHELL}>
       <ScreenHeader moduleNum={6} title="Z-Transform" onBack={onBack} />
       <div className="px-6 flex-1 overflow-y-auto pb-6">
         <div className="rounded-2xl p-4 mb-4 relative overflow-hidden text-white"
